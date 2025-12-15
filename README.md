@@ -103,7 +103,7 @@ python Part3_ComplexEnv/PPG_Impala.py
 ```
 
 
-* **Results:** DQN (Impala) successfully solved the environment (Avg Reward: 3.54, Max: 8.0) by leveraging Experience Replay to overcome reward sparsity. PPG failed to converge.
+* **Results:** DQN (Impala) successfully solved the environment (Avg Reward: 3.54, Max: 9.0) by leveraging Experience Replay to overcome reward sparsity. PPG failed to converge.
 
 ---
 
