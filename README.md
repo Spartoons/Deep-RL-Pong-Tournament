@@ -1,116 +1,155 @@
-# Deep Reinforcement Learning: From Pong to Complex Environments
+# Deep Reinforcement Learning Project**Authors:**
 
-**Authors:**
 * Juan Sebastian Mañosas Guerrero Alveolos (NIU: 1671913)
 * Mateo Jure (NIU: 1705977)
 * Aran Oliveras (NIU: 1708069)
 
-**Course:** Bachelor's Degree in Artificial Intelligence - UAB  
+**Course:** Bachelor's Degree in Artificial Intelligence - UAB
 **Date:** December 2025
 
 ---
 
-## 📖 Project Overview
+## 📖 Project OverviewThis repository contains the source code for our Deep Reinforcement Learning project. The solution is divided into three parts, corresponding to the assignment requirements:
 
-This repository contains the implementation for the Deep Reinforcement Learning project. The project addresses three distinct challenges using the Arcade Learning Environment (ALE):
+1. 
+**Part 1: Solving Pong** - Comparison of DQN and PPO on `PongNoFrameskip-v4`.
 
-1.  **Solving Pong:** A comparison between DQN and a custom PPO implementation on `PongNoFrameskip-v4`.
-2.  **Pong World Tournament:** A Multi-Agent Reinforcement Learning (MARL) system ("The Arena") training competitive agents using PettingZoo and PPG/Impala architectures.
-3.  **Complex Environment (Basic Math):** A study on sparse rewards using `ALE/BasicMath-v5`, comparing Asynchronous DQN and PPG.
+
+2. 
+**Part 2: Pong World Tournament** - A Multi-Agent League ("The Arena") using PettingZoo and PPG agents.
+
+
+3. 
+**Part 3: Complex Environment** - Solving `ALE/BasicMath-v5` using ImpalaCNN architectures.
+
+
 
 ---
 
-## ⚙️ Installation & Requirements
+## ⚙️ Installation & Requirements###1. PrerequisitesEnsure you have **Python 3.8+** installed. This project relies on `gymnasium` (v1.0.0+), `pettingzoo`, and `torch`.
 
-This project requires Python 3.8+ and the Gymnasium API (v1.0.0+).
-
-### 1. Clone the repository
-```bash
-git clone [https://github.com/YourUsername/YourRepoName.git](https://github.com/YourUsername/YourRepoName.git)
-cd YourRepoName
-
-```
-
-### 2. Install DependenciesWe have provided a `requirements.txt` file. Ensure `AutoROM` is accepted to download Atari ROMs.
+###2. SetupClone the repository and install the dependencies listed in `requirements.txt`:
 
 ```bash
+# Install Python dependencies
 pip install -r requirements.txt
+
+# Install Atari ROMs (Required for Pong and BasicMath)
 AutoROM --accept-license
 
 ```
 
-**Key Libraries used:**
-
-* `torch` (PyTorch)
-* `gymnasium[atari, accept-rom-license]`
-* `pettingzoo[atari]`
-* `supersuit`
-* `wandb` (Weights & Biases for logging)
-* `stable-baselines3` (Used for some baseline comparisons)
+**Note:** The `AutoROM` command is mandatory to download the game files.
 
 ---
 
-## 📂 Structure & Usage###🕹️ Part 1: Solving PongLocated in `Part1_Pong/`. Compares an Off-Policy DQN against an On-Policy custom PPO.
+## 🚀 Execution Instructions###🕹️ Part 1: Solving the Pong Environment*Located in directory: `Part1_Pong/*`
 
-* **Train DQN:**
+**1. Training**
+To train the baseline DQN agent or the PPO agent:
+
 ```bash
+# Train the DQN Agent
 python Part1_Pong/DQN_Pong.py
 
-```
-
-
-* **Train PPO:**
-```bash
+# Train the PPO Agent
 python Part1_Pong/PPO_Agent.py
 
 ```
 
+**2. Testing & Evaluation**
+To evaluate the trained models and verify the preprocessing wrappers (preprocessing verification):
 
-* **Results:** The PPO agent achieved a score of **20.44** with 100% win rate, converging significantly faster than DQN due to parallel environment collection.
-
-### 🏆 Part 2: Pong World TournamentLocated in `Part2_Tournament/`. Uses a custom "Arena" framework to train agents via self-play.
-
-* **Train the Duel (Alpha vs Beta):**
 ```bash
-python Part2_Tournament/arena.py --mode train
+python Part1_Pong/TestPong.py
 
 ```
 
+*This script loads the environment with the defined wrappers and runs test episodes to verify observation spaces and rewards*.
 
-* **Evaluate Champions:**
-Run the evaluation script to see the "Alpha" (Right) vs "Beta" (Left) match logic described in the report.
+---
+
+### 🏆 Part 2: Pong World Tournament*Located in directory: `Part2_Tournament/*`
+
+**1. Training ("The Arena")**
+To launch the multi-agent training loop (Self-Play):
+
+```bash
+python Part2_Tournament/arena.py
+
+```
+
+*This script initializes the PettingZoo environment and trains the agents (Alpha vs Beta) using the logic described in the report*.
+
+**2. Testing ("The Duel")**
+To evaluate the final champions (Alpha vs Beta) or run the "Head-to-Head" evaluation:
+
 ```bash
 python Part2_Tournament/eval_duel.py
 
 ```
 
+*This script performs the 100-episode evaluation and prints the Win Rate and Average Reward as reported in the project documentation*.
 
-* **Video:** A full episode recording is available at `videos/champions_match.mp4`.
+---
 
-### 🧮 Part 3: Complex Environment (Basic Math)Located in `Part3_ComplexEnv/`. Solves `ALE/BasicMath-v5`, a sparse-reward arithmetic game.
+### 🧮 Part 3: Complex Environment (Basic Math)*Located in directory: `Part3_ComplexEnv/*`
 
-* **Run DQN (Best Model):**
+**1. Training**
+We provide two implementations for the `ALE/BasicMath-v5` environment:
+
 ```bash
+# Train the DQN Agent (Best Performing Model)
 python Part3_ComplexEnv/DQN_Impala.py
 
-```
-
-
-* **Run PPG (Experimental):**
-```bash
+# Train the PPG Agent (Experimental)
 python Part3_ComplexEnv/PPG_Impala.py
 
 ```
 
+*Note: The DQN agent uses an ImpalaCNN backbone and asynchronous data collection*.
 
-* **Results:** DQN (Impala) successfully solved the environment (Avg Reward: 3.54, Max: 9.0) by leveraging Experience Replay to overcome reward sparsity. PPG failed to converge.
+**2. Testing & Video Generation**
+To load a saved checkpoint and record a gameplay video:
+
+```bash
+python Part3_ComplexEnv/eval_video.py
+
+```
+
+*This script loads the model from the `models/` subdirectory and saves a `.mp4` file to `videos/*`.
 
 ---
 
-## 📹 Video Demonstrations* **Pong Championship:** [See Video](https://www.google.com/search?q=./videos/champions_match.mp4) - Demonstrates the rallying behavior evolved during the "Duel" training phase.
-* **Basic Math Solution:** [See Video](https://www.google.com/search?q=./videos/basic_math_demo.mp4) - Shows the DQN agent correctly inputting multi-step arithmetic answers.
+## 📂 File Structure
+```text
+/
+[cite_start]├── requirements.txt            # Dependencies [cite: 352]
+[cite_start]├── README.md                   # Execution instructions [cite: 353]
+├── Part1_Pong/                 # Source code for Part 1
+│   ├── DQN_Pong.py
+│   └── TestPong.py
+├── Part2_Tournament/           # Source code for Part 2
+│   ├── arena.py
+│   ├── eval_duel.py
+│   └── models/
+└── Part3_ComplexEnv/           # Source code for Part 3
+    ├── DQN_Impala.py
+    └── eval_video.py
+
+```
 
 ---
 
-## 📄 License
-This project is submitted for academic evaluation at Universitat Autònoma de Barcelona.
+## 📹 VisualizationsVideo demonstrations of the agents are available in the `videos/` folder:
+
+* 
+`champions_match.mp4`: A full episode of the Part 2 Tournament Final.
+
+
+* `basic_math_demo.mp4`: A demonstration of the Part 3 solution.
+
+---
+
+**University Compliance:**
+This project is submitted for the "Deep Reinforcement Learning" course at Universitat Autònoma de Barcelona.
