@@ -50,7 +50,7 @@ AutoROM --accept-license
 
 ---
 
-##📂 Structure & Usage###🕹️ Part 1: Solving PongLocated in `Part1_Pong/`. Compares an Off-Policy DQN against an On-Policy custom PPO.
+## 📂 Structure & Usage###🕹️ Part 1: Solving PongLocated in `Part1_Pong/`. Compares an Off-Policy DQN against an On-Policy custom PPO.
 
 * **Train DQN:**
 ```bash
